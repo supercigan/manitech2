@@ -1,8 +1,10 @@
 # MANITECH UH — Project Summary
 
 **Datum zahájení:** 2026-03-26
+**Datum dokončení:** 2026-03-26
 **Klient:** MANITECH Uherské Hradiště s.r.o.
 **Původní web:** https://manitech-uh.cz/
+**GitHub:** https://github.com/supercigan/manitech2
 
 ---
 
@@ -10,15 +12,21 @@
 
 - [x] Přečteny DNA soubory všech 5 předchozích projektů
 - [x] Screenshoty a analýza původního webu manitech-uh.cz
-- [x] Zvolena unikátní vizuální identita (viz Důležitá rozhodnutí)
+- [x] Zvolena unikátní vizuální identita
 - [x] Vytvořen index.html — kompletní jednostránkový web
+- [x] Opraveny špatné ikony (Spies Hecker, Autolakovna, Diagnostika, Pneuservis, Sklo, Odtah)
+- [x] Opraveny výšky karet (sluzby grid, tým grid)
+- [x] Opraveny avatary týmu (iniciály PP/PV/PT)
+- [x] Přidán footer logo icon
+- [x] Upraven spacing sekcí
+- [x] Přidán watermark (5×7 grid, "Demoverze – Tomáš Smolík", -30°, opacity 9%)
+- [x] GitHub push — repo: supercigan/manitech2
 
 ---
 
 ## Co se řeší
 
-- [x] GitHub push — repo: supercigan/manitech-uh ✓
-- [ ] DNA soubor po dokončení projektu
+- [ ] DNA soubor — hotovo viz níže
 
 ---
 
@@ -28,13 +36,8 @@
 - **Fonty:** Syne (nadpisy) + Outfit (tělo) — žádný z předchozích projektů je nepoužil
 - **Paleta:** Electric blue #3563E9 na deep charcoal #0F1117 — jediný projekt s modrou jako primárním akcentem
 - **Section label:** modrý pill badge (inline, border-radius 100px) — jiné projekty používají left-border linie
-- **Hero dekorace:** CSS radial glow effect (ne canvas, ne ghost text, ne gradient shine)
-- **Diagonal deco:** clip-path panel v hero pro vizuální dynamiku
-
-### Proč blue pro MANITECH
-- Modrá = důvěra → sedí k smluvnímu partnerství s 10+ pojišťovnami
-- Electric blue = moderní tech → Spies Hecker premium lakovna
-- Odlišení od garáže → karosárna pracující s pojišťovnami potřebuje corporate look
+- **Hero dekorace:** CSS radial glow effect + dot grid + diagonal clip-path panel
+- **Watermark:** 5×7 grid opakování (35×), rotate -30°, opacity 9%
 
 ### Informace z původního webu (reálné údaje)
 - **Adresa:** Moravníky 1392, 686 01 Uherské Hradiště (areál UHS JAKOS, Maratice)
@@ -48,20 +51,19 @@
 
 ### Sekce webu
 1. NAV — fixed transparent → dark scroll, hamburger
-2. HERO — dark + blue radial glow, diagonal deco, badge "od roku 2000"
+2. HERO — dark + blue radial glow, diagonal deco, badge "od roku 2000", hodiny karta vpravo
 3. TRUST STRIP — 4 karty (Od roku 2000, 10+ pojišťoven, Spies Hecker, Bezplatná linka)
 4. SLUZBY — 4 hlavní karty (Autoservis, Lakovna, Karosárna, Pojistné události)
 5. DETAIL AUTOSERVISU — grid 8 konkrétních služeb
 6. POJIŠŤOVNY — 10 partnerů v gridu
-7. TÝM — 3 karty s kontakty
+7. TÝM — 3 karty s iniciálami a kontakty
 8. O NÁS — split layout, lokace + text
 9. KONTAKT — form + info na tmavém pozadí
-10. FOOTER — 3 sloupce
+10. FOOTER — 3 sloupce + logo icon
 
 ---
 
 ## Příští kroky
 
-1. GitHub push — vytvořit repo + pushout
-2. Ověřit formulář (Formspree nebo placeholder)
-3. Finalizovat DNA soubor projektu
+- Předat klientovi, smazat watermark
+- Nastavit Formspree pro kontaktní formulář
