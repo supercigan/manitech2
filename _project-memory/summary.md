@@ -17,7 +17,7 @@
 
 ## Co se řeší
 
-- [ ] GitHub push (repo: manitech-uh nebo drahomirmachala)
+- [x] GitHub push — repo: supercigan/manitech-uh ✓
 - [ ] DNA soubor po dokončení projektu
 
 ---
