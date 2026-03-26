@@ -1,0 +1,1919 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MANITECH UH — Autoservis, Karosárna, Lakovna | Uherské Hradiště</title>
+  <meta name="description" content="MANITECH Uherské Hradiště — komplexní autoservis, karosárna a lakovna v areálu UHS JAKOS. Opravujeme vozy od roku 2000. Smluvní partner předních pojišťoven.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* ═══════════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body { overflow-x: hidden; font-family: 'Outfit', sans-serif; background: #F7F8FB; color: #0F1117; }
+
+    /* ═══════════════════════════════════════════
+       CSS VARIABLES
+    ═══════════════════════════════════════════ */
+    :root {
+      --deep:        #0F1117;
+      --deep-mid:    #131722;
+      --deep-soft:   #1A1F2E;
+      --blue:        #3563E9;
+      --blue-d:      #2A50D0;
+      --blue-l:      #EEF2FF;
+      --blue-ll:     #F5F7FF;
+      --light:       #F7F8FB;
+      --mid:         #ECEEF4;
+      --white:       #FFFFFF;
+      --text-dark:   #0F1117;
+      --text-mid:    #4B5563;
+      --text-light:  #9CA3AF;
+      --border:      #E5E7EF;
+      --border-dark: rgba(255,255,255,0.08);
+
+      --font-head: 'Syne', sans-serif;
+      --font-body: 'Outfit', sans-serif;
+
+      --r-sm: 8px;
+      --r-md: 12px;
+      --r-lg: 20px;
+
+      --max-w: 1200px;
+      --section-py: 7rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       TYPOGRAPHY
+    ═══════════════════════════════════════════ */
+    h1, h2, h3, h4 { font-family: var(--font-head); line-height: 1.15; }
+    h1 { font-size: clamp(2.6rem, 5.5vw, 4.8rem); font-weight: 800; }
+    h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; }
+    h3 { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 700; }
+    p { line-height: 1.75; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ═══════════════════════════════════════════
+       UTILITIES
+    ═══════════════════════════════════════════ */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    .label-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 14px;
+      background: rgba(53, 99, 233, 0.1);
+      border: 1px solid rgba(53, 99, 233, 0.25);
+      border-radius: 100px;
+      color: var(--blue);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      font-family: var(--font-body);
+      margin-bottom: 1.2rem;
+    }
+    .label-pill--dark {
+      background: rgba(53, 99, 233, 0.15);
+      border-color: rgba(53, 99, 233, 0.35);
+      color: #7BA7FF;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+    .d5 { transition-delay: 0.5s; }
+    .d6 { transition-delay: 0.6s; }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.2rem 0;
+      transition: background 0.3s, padding 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled {
+      background: var(--deep);
+      padding: 0.85rem 0;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .nav-logo-icon svg { width: 22px; height: 22px; }
+    .nav-logo-text {
+      font-family: var(--font-head);
+      font-size: 1.65rem;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .nav-logo-sub {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+      display: block;
+      margin-top: -2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 0.6rem 1.4rem;
+      background: var(--blue);
+      color: var(--white) !important;
+      border-radius: var(--r-sm);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--blue-d); transform: translateY(-1px); }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--deep);
+      z-index: 99;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-head);
+      font-size: 1.6rem;
+      font-weight: 700;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--white); }
+    .mobile-menu .mobile-cta {
+      padding: 0.9rem 2.5rem;
+      background: var(--blue);
+      border-radius: var(--r-sm);
+      color: var(--white);
+      font-size: 1.1rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--deep);
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 8rem 0 5rem;
+    }
+
+    /* Radial glow decorations */
+    #hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 15% 110%, rgba(53,99,233,0.18) 0%, transparent 65%),
+        radial-gradient(circle 50% at 90% -5%, rgba(53,99,233,0.07) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    /* Diagonal decorative panel */
+    .hero-deco-panel {
+      position: absolute;
+      right: -5%;
+      top: 0;
+      width: 42%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(53,99,233,0.04) 50%, rgba(53,99,233,0.08) 100%);
+      clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+      pointer-events: none;
+    }
+
+    /* Subtle dot grid */
+    .hero-dots {
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(53,99,233,0.12) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+      opacity: 0.6;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border: 1px solid rgba(53,99,233,0.4);
+      border-radius: 100px;
+      color: #7BA7FF;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--blue);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.4); }
+    }
+
+    .hero-title {
+      color: var(--white);
+      margin-bottom: 1.5rem;
+      max-width: 680px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: #7BA7FF;
+    }
+
+    .hero-desc {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.1rem;
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.85rem 1.8rem;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: var(--r-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 20px rgba(53,99,233,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--blue-d);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(53,99,233,0.45);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 0.85rem 1.8rem;
+      background: transparent;
+      color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: var(--r-sm);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: rgba(255,255,255,0.5);
+      color: var(--white);
+      background: rgba(255,255,255,0.05);
+    }
+
+    .hero-info-bar {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .hero-info-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.88rem;
+    }
+    .hero-info-item svg { color: var(--blue); flex-shrink: 0; }
+    .hero-info-item strong { color: rgba(255,255,255,0.8); }
+
+    /* Hero hours card (right side) */
+    .hero-hours-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-lg);
+      padding: 2rem;
+      min-width: 220px;
+      backdrop-filter: blur(10px);
+    }
+    .hero-hours-card-title {
+      font-family: var(--font-head);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .hero-hours-card-title::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22C55E;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.25);
+    }
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.88rem;
+    }
+    .hours-row:last-child { border-bottom: none; }
+    .hours-row .day { color: rgba(255,255,255,0.5); }
+    .hours-row .time { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .hours-row .closed { color: rgba(255,255,255,0.3); }
+
+    /* ═══════════════════════════════════════════
+       TRUST STRIP
+    ═══════════════════════════════════════════ */
+    #trust {
+      background: var(--white);
+      padding: 4rem 0;
+      border-top: 3px solid var(--blue);
+    }
+    .trust-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+    .trust-card {
+      padding: 2rem 1.8rem;
+      background: var(--light);
+      text-align: center;
+      transition: background 0.2s;
+    }
+    .trust-card:hover { background: var(--blue-ll); }
+    .trust-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--blue-l);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+    .trust-card-icon svg { color: var(--blue); }
+    .trust-card h3 {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+    .trust-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SLUZBY — 4 hlavní oblasti
+    ═══════════════════════════════════════════ */
+    #sluzby {
+      background: var(--deep);
+      padding: var(--section-py) 0;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    .section-header h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .section-header p {
+      color: rgba(255,255,255,0.55);
+      max-width: 520px;
+      margin: 0 auto;
+      font-size: 1rem;
+    }
+    .section-header--light h2 { color: var(--text-dark); }
+    .section-header--light p { color: var(--text-mid); }
+
+    .sluzby-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5px;
+    }
+    .sluzba-card {
+      background: var(--deep-soft);
+      padding: 2.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .sluzba-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: var(--blue);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .sluzba-card:hover { background: #1e2438; }
+    .sluzba-card:hover::after { transform: scaleX(1); }
+
+    .sluzba-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(53,99,233,0.12);
+      border: 1px solid rgba(53,99,233,0.25);
+      border-radius: var(--r-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: background 0.3s;
+    }
+    .sluzba-card:hover .sluzba-icon {
+      background: rgba(53,99,233,0.2);
+    }
+    .sluzba-icon svg { color: #7BA7FF; }
+
+    .sluzba-card h3 {
+      color: var(--white);
+      font-size: 1.35rem;
+      margin-bottom: 0.8rem;
+    }
+    .sluzba-card p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.93rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+    }
+    .sluzba-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag {
+      padding: 3px 10px;
+      background: rgba(53,99,233,0.1);
+      border: 1px solid rgba(53,99,233,0.2);
+      border-radius: 100px;
+      color: rgba(255,255,255,0.55);
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════
+       DETAIL AUTOSERVISU
+    ═══════════════════════════════════════════ */
+    #detail {
+      background: var(--light);
+      padding: var(--section-py) 0;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+    .detail-item {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .detail-item:hover {
+      border-color: var(--blue);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 24px rgba(53,99,233,0.1);
+    }
+    .detail-item-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue-l);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.9rem;
+    }
+    .detail-item-icon svg { color: var(--blue); }
+    .detail-item h4 {
+      font-family: var(--font-head);
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.35rem;
+    }
+    .detail-item p {
+      font-size: 0.82rem;
+      color: var(--text-light);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════════
+       POJIŠŤOVNY
+    ═══════════════════════════════════════════ */
+    #pojistovny {
+      background: var(--deep-mid);
+      padding: var(--section-py) 0;
+    }
+    .pojistovny-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+    .pojistovny-intro h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .pojistovny-intro p {
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      font-size: 1rem;
+    }
+    .pojistovny-cta-box {
+      background: rgba(53,99,233,0.08);
+      border: 1px solid rgba(53,99,233,0.2);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+    }
+    .pojistovny-cta-box h3 {
+      color: var(--white);
+      margin-bottom: 0.6rem;
+      font-size: 1.25rem;
+    }
+    .pojistovny-cta-box p {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .pojistovny-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1px;
+    }
+    .pojistovna-badge {
+      background: rgba(255,255,255,0.04);
+      padding: 1.5rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+      transition: background 0.2s;
+    }
+    .pojistovna-badge:hover {
+      background: rgba(53,99,233,0.1);
+    }
+    .pojistovna-badge span {
+      font-family: var(--font-head);
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .pojistovna-badge:hover span { color: rgba(255,255,255,0.9); }
+
+    /* ═══════════════════════════════════════════
+       TÝM
+    ═══════════════════════════════════════════ */
+    #tym {
+      background: var(--white);
+      padding: var(--section-py) 0;
+    }
+    .tym-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+    .tym-card {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+      text-align: center;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
+    }
+    .tym-card:hover {
+      border-color: var(--blue);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(53,99,233,0.1);
+    }
+    .tym-avatar {
+      width: 80px;
+      height: 80px;
+      background: var(--blue-l);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+      border: 3px solid var(--blue);
+    }
+    .tym-avatar svg { color: var(--blue); }
+    .tym-card h3 {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+      margin-bottom: 0.3rem;
+    }
+    .tym-role {
+      font-size: 0.8rem;
+      color: var(--blue);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+    .tym-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .tym-contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      transition: color 0.2s;
+    }
+    .tym-contact-item:hover { color: var(--blue); }
+    .tym-contact-item svg { color: var(--blue); flex-shrink: 0; }
+    .tym-contact-item a { color: inherit; }
+
+    /* ═══════════════════════════════════════════
+       O NÁS
+    ═══════════════════════════════════════════ */
+    #o-nas {
+      background: var(--light);
+      padding: var(--section-py) 0;
+    }
+    .onas-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .onas-content .label-pill { }
+    .onas-content h2 {
+      color: var(--text-dark);
+      margin-bottom: 1.2rem;
+    }
+    .onas-content p {
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .onas-features {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .onas-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.93rem;
+      color: var(--text-mid);
+    }
+    .onas-feature svg { color: var(--blue); margin-top: 2px; flex-shrink: 0; }
+
+    .onas-map-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+    }
+    .onas-map-placeholder {
+      height: 240px;
+      background: linear-gradient(135deg, var(--blue-ll) 0%, var(--mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .onas-map-placeholder::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 30px 30px;
+      opacity: 0.5;
+    }
+    .map-pin {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .map-pin-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--blue);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(53,99,233,0.4);
+    }
+    .map-pin-icon svg {
+      transform: rotate(45deg);
+      color: white;
+    }
+    .onas-address-card {
+      padding: 1.5rem;
+    }
+    .onas-address-card h4 {
+      font-family: var(--font-head);
+      font-size: 1.05rem;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .onas-address-card p {
+      font-size: 0.88rem;
+      color: var(--text-mid);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue);
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: gap 0.2s;
+    }
+    .map-link:hover { gap: 10px; }
+
+    /* ═══════════════════════════════════════════
+       KONTAKT
+    ═══════════════════════════════════════════ */
+    #kontakt {
+      background: var(--deep);
+      padding: var(--section-py) 0;
+    }
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .kontakt-info .label-pill--dark { margin-bottom: 1.5rem; }
+    .kontakt-info h2 {
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+    .kontakt-info > p {
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+    .kontakt-items {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    .kontakt-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .kontakt-item-icon {
+      width: 44px;
+      height: 44px;
+      background: rgba(53,99,233,0.12);
+      border: 1px solid rgba(53,99,233,0.25);
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kontakt-item-icon svg { color: #7BA7FF; }
+    .kontakt-item-text { }
+    .kontakt-item-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 3px;
+    }
+    .kontakt-item-value {
+      font-size: 0.97rem;
+      color: rgba(255,255,255,0.85);
+      font-weight: 500;
+    }
+    .kontakt-item-value a:hover { color: var(--blue); }
+
+    /* Form */
+    .kontakt-form {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--r-lg);
+      padding: 2.5rem;
+    }
+    .kontakt-form h3 {
+      color: var(--white);
+      font-size: 1.3rem;
+      margin-bottom: 1.8rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1.2rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.45);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--r-sm);
+      padding: 0.75rem 1rem;
+      color: rgba(255,255,255,0.85);
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      transition: border-color 0.2s, background 0.2s;
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      background: rgba(53,99,233,0.06);
+    }
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group select option { background: var(--deep); color: white; }
+    .form-group textarea { resize: vertical; min-height: 110px; }
+    .form-submit {
+      width: 100%;
+      padding: 0.9rem;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: var(--r-sm);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .form-submit:hover { background: var(--blue-d); transform: translateY(-1px); }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    footer {
+      background: #0A0C12;
+      padding: 4rem 0 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand h3 {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+    }
+    .footer-brand .sub {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .footer-brand p {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.88rem;
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-col h4 {
+      font-family: var(--font-head);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.2rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .footer-links a {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--white); }
+    .footer-contact-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.88rem;
+      margin-bottom: 0.7rem;
+    }
+    .footer-contact-item svg { color: rgba(53,99,233,0.7); flex-shrink: 0; margin-top: 2px; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-bottom p {
+      color: rgba(255,255,255,0.25);
+      font-size: 0.82rem;
+    }
+    .footer-bottom a { color: rgba(53,99,233,0.6); }
+    .footer-bottom a:hover { color: var(--blue); }
+
+    /* ═══════════════════════════════════════════
+       RESPONSIVE
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-content { grid-template-columns: 1fr; }
+      .hero-hours-card { display: none; }
+      .detail-grid { grid-template-columns: repeat(2, 1fr); }
+      .pojistovny-grid { grid-template-columns: repeat(3, 1fr); }
+      .pojistovny-intro { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    @media (max-width: 900px) {
+      .trust-grid { grid-template-columns: repeat(2, 1fr); }
+      .sluzby-grid { grid-template-columns: 1fr; }
+      .tym-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+      .onas-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .kontakt-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --section-py: 5rem; }
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      .hero-info-bar { flex-direction: column; gap: 0.75rem; }
+      .hero-ctas { flex-direction: column; width: 100%; }
+      .btn-primary, .btn-ghost { justify-content: center; }
+      .form-row { grid-template-columns: 1fr; }
+      .pojistovny-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      .trust-grid { grid-template-columns: 1fr; }
+      .detail-grid { grid-template-columns: 1fr; }
+      .pojistovny-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       NAV
+  ═══════════════════════════════════════════ -->
+  <nav id="navbar">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-icon">
+          <svg viewBox="0 0 22 22" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 16L8 6l3 6 3-6 4 10"/>
+            <path d="M2 18h18"/>
+          </svg>
+        </div>
+        <div>
+          <span class="nav-logo-text">MANITECH</span>
+          <span class="nav-logo-sub">Uherské Hradiště</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#sluzby">Služby</a></li>
+        <li><a href="#pojistovny">Pojišťovny</a></li>
+        <li><a href="#tym">Tým</a></li>
+        <li><a href="#o-nas">O nás</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+
+      <a href="#kontakt" class="nav-cta nav-links">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+        Objednat se
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#sluzby" class="mobile-link">Služby</a>
+    <a href="#pojistovny" class="mobile-link">Pojišťovny</a>
+    <a href="#tym" class="mobile-link">Tým</a>
+    <a href="#o-nas" class="mobile-link">O nás</a>
+    <a href="#kontakt" class="mobile-link">Kontakt</a>
+    <a href="#kontakt" class="mobile-cta">Objednat se</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-dots"></div>
+    <div class="hero-deco-panel"></div>
+
+    <div class="hero-content container">
+      <div class="hero-text">
+        <div class="hero-badge">Fungujeme od roku 2000</div>
+
+        <h1 class="hero-title fade-up">
+          Autoservis, karosárna<br>
+          a lakovna —<br>
+          <em>vše pod jednou střechou</em>
+        </h1>
+
+        <p class="hero-desc fade-up d1">
+          Specializujeme se na vozy Škoda, VW, Seat a Audi. Jsme smluvním partnerem
+          předních pojišťoven a provádíme opravy kvalitně a rychle v moderně
+          vybaveném prostředí.
+        </p>
+
+        <div class="hero-ctas fade-up d2">
+          <a href="#kontakt" class="btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            Objednat se
+          </a>
+          <a href="#sluzby" class="btn-ghost">
+            Naše služby
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+
+        <div class="hero-info-bar fade-up d3">
+          <div class="hero-info-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            <span>Moravníky 1392, <strong>Uherské Hradiště</strong></span>
+          </div>
+          <div class="hero-info-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+            </svg>
+            <a href="tel:+420800446688" style="color:inherit;"><strong>+420 800 44 66 88</strong></a>
+          </div>
+          <div class="hero-info-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            <span>Po–Pá <strong>7:00–16:00</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-hours-card fade-up d2">
+        <div class="hero-hours-card-title">Otevírací doba</div>
+        <div class="hours-row"><span class="day">Pondělí</span><span class="time">7:00–16:00</span></div>
+        <div class="hours-row"><span class="day">Úterý</span><span class="time">7:00–16:00</span></div>
+        <div class="hours-row"><span class="day">Středa</span><span class="time">7:00–16:00</span></div>
+        <div class="hours-row"><span class="day">Čtvrtek</span><span class="time">7:00–16:00</span></div>
+        <div class="hours-row"><span class="day">Pátek</span><span class="time">7:00–16:00</span></div>
+        <div class="hours-row"><span class="day">Sobota</span><span class="closed">Zavřeno</span></div>
+        <div class="hours-row"><span class="day">Neděle</span><span class="closed">Zavřeno</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TRUST STRIP
+  ═══════════════════════════════════════════ -->
+  <section id="trust">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-card fade-up">
+          <div class="trust-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+          </div>
+          <h3>25+</h3>
+          <p>let praxe na trhu — opravujeme vozidla od roku 2000</p>
+        </div>
+        <div class="trust-card fade-up d1">
+          <div class="trust-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3>10+</h3>
+          <p>smluvních pojišťoven — vyřídíme pojistnou událost za vás</p>
+        </div>
+        <div class="trust-card fade-up d2">
+          <div class="trust-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <h3>Spies Hecker</h3>
+          <p>prémiová technologie lakování — dokonalý výsledný nátěr</p>
+        </div>
+        <div class="trust-card fade-up d3">
+          <div class="trust-card-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+            </svg>
+          </div>
+          <h3>800 44 66 88</h3>
+          <p>bezplatná linka — zavolejte a poradíme s opravou</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SLUZBY
+  ═══════════════════════════════════════════ -->
+  <section id="sluzby">
+    <div class="container">
+      <div class="section-header fade-up">
+        <div class="label-pill label-pill--dark">Naše služby</div>
+        <h2>Komplexní péče o váš vůz</h2>
+        <p>Od mechanické opravy přes karosářské práce až po profesionální lakování — vše na jednom místě.</p>
+      </div>
+
+      <div class="sluzby-grid">
+        <!-- Autoservis -->
+        <div class="sluzba-card fade-up">
+          <div class="sluzba-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h3>Mechanický autoservis</h3>
+          <p>Provádíme veškeré mechanické opravy vozidel. Připravíme váš vůz na STK, vše zprostředkujeme. Zajistíme náhradní díly, odtah vozidla i výměnu čelního skla.</p>
+          <div class="sluzba-tags">
+            <span class="tag">Mechanické opravy</span>
+            <span class="tag">Diagnostika</span>
+            <span class="tag">Příprava na STK</span>
+            <span class="tag">Brzdové centrum</span>
+            <span class="tag">Podvozkové centrum</span>
+          </div>
+        </div>
+
+        <!-- Pneuservis -->
+        <div class="sluzba-card fade-up d1">
+          <div class="sluzba-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+              <line x1="12" y1="2" x2="12" y2="5"/><line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/><line x1="19" y1="12" x2="22" y2="12"/>
+            </svg>
+          </div>
+          <h3>Pneuservis</h3>
+          <p>Přezutí, vyvážení kol, montáž a demontáž pneumatik. Člen sítě AutoProfiTeam — zaručujeme kvalitu a profesionalitu pneumatikářských prací.</p>
+          <div class="sluzba-tags">
+            <span class="tag">Přezutí</span>
+            <span class="tag">Vyvážení kol</span>
+            <span class="tag">AutoProfiTeam</span>
+          </div>
+        </div>
+
+        <!-- Lakovna -->
+        <div class="sluzba-card fade-up d1">
+          <div class="sluzba-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M2 22 L7 2 L12 17 L17 7 L22 22"/>
+              <path d="M9 22 c0-3.5 6-3.5 6 0"/>
+            </svg>
+          </div>
+          <h3>Autolakovna</h3>
+          <p>Využíváme doporučené technologie od renomovaných výrobců autolaku — Spies Hecker. Lakovací box s přípravným pracovištěm a vlastní míchárna barev pro přesnou shodu odstínu.</p>
+          <div class="sluzba-tags">
+            <span class="tag">Spies Hecker</span>
+            <span class="tag">Lakovací box</span>
+            <span class="tag">Míchárna barev</span>
+            <span class="tag">Přípravné pracoviště</span>
+          </div>
+        </div>
+
+        <!-- Karosarna + Pojistne -->
+        <div class="sluzba-card fade-up d2">
+          <div class="sluzba-icon">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+          </div>
+          <h3>Karosárna &amp; Havárijní opravy</h3>
+          <p>Karosářské práce, rovnání na stolici, opravy koroze, výměny výfuku, opravy plastů, rovnání spotem. Jsme smluvním partnerem pojišťoven — vyřídíme pojistnou událost za vás.</p>
+          <div class="sluzba-tags">
+            <span class="tag">Rovnání na stolici</span>
+            <span class="tag">Opravy koroze</span>
+            <span class="tag">Pojistné události</span>
+            <span class="tag">Odhad ceny opravy</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DETAIL AUTOSERVISU
+  ═══════════════════════════════════════════ -->
+  <section id="detail">
+    <div class="container">
+      <div class="section-header section-header--light fade-up">
+        <div class="label-pill">Kompletní autoservis</div>
+        <h2>Co všechno zvládneme</h2>
+        <p>Moderně vybavený servis s diagnostikou pro vozy všech značek.</p>
+      </div>
+
+      <div class="detail-grid">
+        <div class="detail-item fade-up">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+            </svg>
+          </div>
+          <h4>Diagnostika</h4>
+          <p>Elektronická diagnostika závad pro všechny značky vozidel</p>
+        </div>
+        <div class="detail-item fade-up d1">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+            </svg>
+          </div>
+          <h4>Příprava na STK</h4>
+          <p>Kompletní příprava + zprostředkování technické kontroly</p>
+        </div>
+        <div class="detail-item fade-up d2">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h4>Pneuservis</h4>
+          <p>Přezutí, vyvážení, opravy pneumatik — sezónní i celoroční</p>
+        </div>
+        <div class="detail-item fade-up d3">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/>
+              <line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/>
+            </svg>
+          </div>
+          <h4>Brzdové centrum</h4>
+          <p>Výměna brzdových destiček, kotoučů, kapalin a seřízení</p>
+        </div>
+        <div class="detail-item fade-up">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/>
+            </svg>
+          </div>
+          <h4>Podvozkové centrum</h4>
+          <p>Geometrie, seřízení podvozku, tlumič a pružiny</p>
+        </div>
+        <div class="detail-item fade-up d1">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+            </svg>
+          </div>
+          <h4>Výměna čelního skla</h4>
+          <p>Bezpečná a rychlá výměna s pojistnou asistencí</p>
+        </div>
+        <div class="detail-item fade-up d2">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
+          <h4>Náhradní díly</h4>
+          <p>Zajistíme originální i náhradní díly za výhodné ceny</p>
+        </div>
+        <div class="detail-item fade-up d3">
+          <div class="detail-item-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 3l4 4 4-4M5 7V3"/><path d="M19 21l-4-4-4 4M15 17v4"/>
+              <path d="M7 11h10a4 4 0 0 1 0 8H7a4 4 0 0 1 0-8z"/>
+            </svg>
+          </div>
+          <h4>Odtahovka</h4>
+          <p>V případě poruchy zajistíme odtah vašeho vozidla</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       POJIŠŤOVNY
+  ═══════════════════════════════════════════ -->
+  <section id="pojistovny">
+    <div class="container">
+      <div class="pojistovny-intro fade-up">
+        <div>
+          <div class="label-pill label-pill--dark">Smluvní servis</div>
+          <h2>Partneři mezi pojišťovnami</h2>
+          <p>Havárie? Nehoda? Zajistíme vše od odhadu škody až po kompletní opravu a vyúčtování s pojišťovnou. Nemusíte nic řešit — postaráme se za vás.</p>
+          <br>
+          <p>Napište nám popis problému nebo rovnou fotos — obratem pošleme odhad ceny opravy.</p>
+          <br>
+          <a href="mailto:nehody@manitech-uh.cz" class="btn-primary" style="display: inline-flex; margin-top: 0.5rem;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Napsat o nehodu
+          </a>
+        </div>
+
+        <div class="pojistovny-cta-box fade-up d2">
+          <h3>Jak to funguje?</h3>
+          <p>Kontaktujte nás s popisem nebo fotkou havárie. Zajistíme odhad, projednáme s pojišťovnou a opravíme vozidlo — vše na jednom místě.</p>
+          <div style="display:flex; flex-direction:column; gap: 0.7rem; margin-top: 1.2rem;">
+            <div style="display:flex; align-items:center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.88rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7BA7FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Odhad škody zdarma
+            </div>
+            <div style="display:flex; align-items:center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.88rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7BA7FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Komunikace s pojišťovnou za vás
+            </div>
+            <div style="display:flex; align-items:center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.88rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7BA7FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Kompletní oprava karoserie a lak
+            </div>
+            <div style="display:flex; align-items:center; gap: 10px; color: rgba(255,255,255,0.6); font-size: 0.88rem;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7BA7FF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Koordinátor pojistných událostí osobně
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pojistovny-grid fade-up">
+        <div class="pojistovna-badge"><span>Česká pojišťovna</span></div>
+        <div class="pojistovna-badge"><span>Allianz</span></div>
+        <div class="pojistovna-badge"><span>ČSOB Pojišťovna</span></div>
+        <div class="pojistovna-badge"><span>Kooperativa</span></div>
+        <div class="pojistovna-badge"><span>Generali</span></div>
+        <div class="pojistovna-badge"><span>Slavia pojišťovna</span></div>
+        <div class="pojistovna-badge"><span>CPP</span></div>
+        <div class="pojistovna-badge"><span>Triglav</span></div>
+        <div class="pojistovna-badge"><span>AXA</span></div>
+        <div class="pojistovna-badge"><span>Servisní pojišťovna</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       TÝM
+  ═══════════════════════════════════════════ -->
+  <section id="tym">
+    <div class="container">
+      <div class="section-header section-header--light fade-up">
+        <div class="label-pill">Poznejte nás</div>
+        <h2>Kdo se vám bude věnovat</h2>
+        <p>Zkušený tým profesionálů — každý odborník ve svém oboru.</p>
+      </div>
+
+      <div class="tym-grid">
+        <div class="tym-card fade-up">
+          <div class="tym-avatar">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>Přemysl Plachý</h3>
+          <span class="tym-role">Koordinátor pojistných událostí</span>
+          <div class="tym-contacts">
+            <a href="tel:+420774131455" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+              </svg>
+              <a href="tel:+420774131455">774 131 455</a>
+            </a>
+            <a href="mailto:nehody@manitech-uh.cz" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              nehody@manitech-uh.cz
+            </a>
+          </div>
+        </div>
+
+        <div class="tym-card fade-up d2">
+          <div class="tym-avatar">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>Přemysl Vavřina</h3>
+          <span class="tym-role">Vedoucí servisu</span>
+          <div class="tym-contacts">
+            <a href="tel:+420778443700" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+              </svg>
+              <a href="tel:+420778443700">778 443 700</a>
+            </a>
+            <a href="mailto:servis@manitech-uh.cz" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              servis@manitech-uh.cz
+            </a>
+          </div>
+        </div>
+
+        <div class="tym-card fade-up d4">
+          <div class="tym-avatar">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>
+            </svg>
+          </div>
+          <h3>Pavel Tomešek</h3>
+          <span class="tym-role">Přijímací technik servisu</span>
+          <div class="tym-contacts">
+            <a href="tel:+420777166773" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+              </svg>
+              <a href="tel:+420777166773">777 166 773</a>
+            </a>
+            <a href="mailto:servis@manitech-uh.cz" class="tym-contact-item">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+              servis@manitech-uh.cz
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       O NÁS
+  ═══════════════════════════════════════════ -->
+  <section id="o-nas">
+    <div class="container">
+      <div class="onas-grid">
+        <div class="onas-content fade-up">
+          <div class="label-pill">O nás</div>
+          <h2>Moderně vybavený servis od roku 2000</h2>
+          <p>Autoservis MANITECH se nachází v areálu firmy UHS JAKOS v Uherském Hradišti – Maraticích, za čerpací stanicí směrem k řece Moravě.</p>
+          <p>Specializujeme se na mechanické a karosářské opravy. Autoservis je vybaven lakovnou s moderním lakovacím boxem a přípravným pracovištěm. Jsme smluvním partnerem několika pojišťoven.</p>
+          <p>Opravujeme vozy <strong>Škoda, Seat, Volkswagen a Audi</strong>, stejně dobře však zvládneme opravit i vozy jiných značek.</p>
+
+          <div class="onas-features">
+            <div class="onas-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Specializace na Škoda, VW, Seat, Audi
+            </div>
+            <div class="onas-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Moderní lakovací box s technologií Spies Hecker
+            </div>
+            <div class="onas-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Člen sítě AutoProfiTeam
+            </div>
+            <div class="onas-feature">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Smluvní partner 10+ pojišťoven
+            </div>
+          </div>
+        </div>
+
+        <div class="onas-map-card fade-up d2">
+          <div class="onas-map-placeholder">
+            <div class="map-pin">
+              <div class="map-pin-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="onas-address-card">
+            <h4>MANITECH Uherské Hradiště</h4>
+            <p>Moravníky 1392, 686 01 Uherské Hradiště<br>Areál UHS JAKOS, Maratice<br>(za čerpací stanicí směrem k řece Moravě)</p>
+            <a href="https://www.google.com/maps/search/Moravníky+1392+Uherské+Hradiště" target="_blank" rel="noopener" class="map-link">
+              Naplánovat trasu
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       KONTAKT
+  ═══════════════════════════════════════════ -->
+  <section id="kontakt">
+    <div class="container">
+      <div class="kontakt-grid">
+        <div class="kontakt-info fade-up">
+          <div class="label-pill label-pill--dark">Kontakt</div>
+          <h2>Pojďme to vyřešit</h2>
+          <p>Napište nám o opravě, pošlete foto problému nebo rovnou zavolejte — poradíme vám a domluvíme termín.</p>
+
+          <div class="kontakt-items">
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+                </svg>
+              </div>
+              <div class="kontakt-item-text">
+                <div class="kontakt-item-label">Bezplatná linka</div>
+                <div class="kontakt-item-value"><a href="tel:+420800446688">+420 800 44 66 88</a></div>
+              </div>
+            </div>
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="kontakt-item-text">
+                <div class="kontakt-item-label">Servis</div>
+                <div class="kontakt-item-value"><a href="mailto:servis@manitech-uh.cz">servis@manitech-uh.cz</a></div>
+              </div>
+            </div>
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                </svg>
+              </div>
+              <div class="kontakt-item-text">
+                <div class="kontakt-item-label">Nehody &amp; pojistné události</div>
+                <div class="kontakt-item-value"><a href="mailto:nehody@manitech-uh.cz">nehody@manitech-uh.cz</a></div>
+              </div>
+            </div>
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <div class="kontakt-item-text">
+                <div class="kontakt-item-label">Adresa</div>
+                <div class="kontakt-item-value">Moravníky 1392, 686 01 Uherské Hradiště</div>
+              </div>
+            </div>
+            <div class="kontakt-item">
+              <div class="kontakt-item-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+                </svg>
+              </div>
+              <div class="kontakt-item-text">
+                <div class="kontakt-item-label">Otevírací doba</div>
+                <div class="kontakt-item-value">Pondělí–Pátek: 7:00–16:00</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="kontakt-form fade-up d2">
+          <h3>Napište nám o opravě</h3>
+          <form>
+            <div class="form-row">
+              <div class="form-group">
+                <label>Jméno</label>
+                <input type="text" placeholder="Vaše jméno">
+              </div>
+              <div class="form-group">
+                <label>Telefon</label>
+                <input type="tel" placeholder="+420 xxx xxx xxx">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>E-mail</label>
+              <input type="email" placeholder="vas@email.cz">
+            </div>
+            <div class="form-group">
+              <label>Vozidlo (značka, model, rok)</label>
+              <input type="text" placeholder="např. Škoda Octavia 2018">
+            </div>
+            <div class="form-group">
+              <label>Typ požadavku</label>
+              <select>
+                <option value="">-- Vyberte typ --</option>
+                <option>Mechanická oprava</option>
+                <option>Karosářská oprava</option>
+                <option>Lakování</option>
+                <option>Pojistná událost / havárie</option>
+                <option>Pneuservis</option>
+                <option>Příprava na STK</option>
+                <option>Jiné</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Popis závady nebo poškození</label>
+              <textarea placeholder="Popište problém nebo přiložte odkaz na fotky..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+              </svg>
+              Odeslat poptávku
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>MANITECH</h3>
+          <span class="sub">Uherské Hradiště s.r.o.</span>
+          <p>Komplexní autoservis, karosárna a lakovna. Opravujeme vozidla od roku 2000. Smluvní partner předních pojišťoven.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigace</h4>
+          <ul class="footer-links">
+            <li><a href="#sluzby">Služby</a></li>
+            <li><a href="#detail">Autoservis</a></li>
+            <li><a href="#pojistovny">Pojišťovny</a></li>
+            <li><a href="#tym">Tým</a></li>
+            <li><a href="#o-nas">O nás</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.13 6.13l.97-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.98 17z"/>
+            </svg>
+            <a href="tel:+420800446688" style="color: rgba(255,255,255,0.5);">+420 800 44 66 88</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+            <a href="mailto:servis@manitech-uh.cz" style="color: rgba(255,255,255,0.5);">servis@manitech-uh.cz</a>
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+            Moravníky 1392, 686 01 Uherské Hradiště
+          </div>
+          <div class="footer-contact-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+            </svg>
+            Po–Pá 7:00–16:00
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2024 MANITECH Uherské Hradiště s.r.o. — Autoservis, karosárna, lakovna od roku 2000.</p>
+        <p>Web vytvořil <a href="#">supercigan</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════
+       JAVASCRIPT
+  ═══════════════════════════════════════════ -->
+  <script>
+    // --- NAV scroll effect ---
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // --- Hamburger menu ---
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-link, .mobile-cta');
+
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+      document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // --- IntersectionObserver fade-up ---
+    const fadeEls = document.querySelectorAll('.fade-up');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    // --- Contact form submit ---
+    const form = document.querySelector('.kontakt-form form');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const btn = form.querySelector('.form-submit');
+        btn.textContent = '✓ Odesláno — ozveme se vám!';
+        btn.style.background = '#22C55E';
+        btn.disabled = true;
+      });
+    }
+
+    // --- Smooth scroll for nav links ---
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          const offset = 80;
+          const top = target.getBoundingClientRect().top + window.scrollY - offset;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
