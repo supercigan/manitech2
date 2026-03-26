@@ -1890,6 +1890,50 @@
   </footer>
 
   <!-- ═══════════════════════════════════════════
+       WATERMARK
+  ═══════════════════════════════════════════ -->
+  <div id="watermark" aria-hidden="true"></div>
+  <style>
+    #watermark {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 0;
+    }
+    #watermark span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.09);
+      letter-spacing: 0.06em;
+      white-space: nowrap;
+      transform: rotate(-30deg);
+      user-select: none;
+    }
+  </style>
+  <script>
+    // --- Watermark grid ---
+    (function() {
+      const wm = document.getElementById('watermark');
+      const text = 'Demoverze – Tomáš Smolík';
+      const count = 5 * 7;
+      for (let i = 0; i < count; i++) {
+        const s = document.createElement('span');
+        s.textContent = text;
+        wm.appendChild(s);
+      }
+    })();
+  </script>
+
+  <!-- ═══════════════════════════════════════════
        JAVASCRIPT
   ═══════════════════════════════════════════ -->
   <script>
